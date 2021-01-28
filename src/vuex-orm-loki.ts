@@ -28,9 +28,10 @@ export default class VuexORMLoki {
    * @constructor
    * @param {Components} components The Vuex-ORM Components collection
    * @param {Options} options The options passed to VuexORM.install
+   * @param {string} databaseName custom name for the LokiJS database (optional)
    */
-  public constructor (components: Components, database: Database, options: Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>, hydrationCompletedCallback: any) {
-    Context.setup(components, database, options, hydrationCompletedCallback)
+  public constructor (components: Components, database: Database, options: Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>, hydrationCompletedCallback: any, databaseName: string) {
+    Context.setup(components, database, options, hydrationCompletedCallback, databaseName)
     VuexORMLoki.setupModelMethods()
   }
 

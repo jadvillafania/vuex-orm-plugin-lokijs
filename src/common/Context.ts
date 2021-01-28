@@ -66,14 +66,17 @@ export default class Context {
    * @param {Components} components The Vuex-ORM Components collection.
    * @param {Database} database The database passed to VuexORM.install.
    * @param {LokiConstructorOptions} lokiOptions The options passed to new LokiJS instance.
+   * @param {string} databaseName custom name for the LokiJS database (optional)
    */
-  private constructor (components: Components, database: Database, options: Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>, hydrationCompletedCallback: any) {
+  private constructor (components: Components, database: Database, options: Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>, hydrationCompletedCallback: any, databaseName: string) {
     this.options = options
     this.components = components
     this.database = database
     this.hydrationCompletedCallback = hydrationCompletedCallback
 
-    this.loki = new LokiJs('vuex-orm-loki', {
+    let name = databaseName || 'vuex-orm-loki';
+
+    this.loki = new LokiJs(name, {
       env: options.env || 'BROWSER',
       verbose: options.verbose || false,
       autoload: options.autoload || true,
@@ -112,7 +115,7 @@ export default class Context {
     })
 
     if (this.hydrationCompletedCallback) {
-      this.hydrationCompletedCallback()
+      this.hydrationCompletedCallback(this.loki)
     }
   };
 
@@ -121,9 +124,10 @@ export default class Context {
    * @param {Components} components The Vuex-ORM Components collection.
    * @param {Database} database The database passed to VuexORM.install.
    * @param {Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>} options The options passed to new LokiJS instance.
+   * @param {string} databaseName custom name for the LokiJS database (optional)
    */
-  public static setup (components: Components, database: Database, options: Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>, hydrationCompletedCallback: any) : Context {
-    this.instance = new Context(components, database, options, hydrationCompletedCallback)
+  public static setup (components: Components, database: Database, options: Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>, hydrationCompletedCallback: any, databaseName: string) : Context {
+    this.instance = new Context(components, database, options, hydrationCompletedCallback, databaseName)
     return this.instance
   }
 

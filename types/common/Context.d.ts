@@ -42,6 +42,7 @@ export default class Context {
      * @param {Components} components The Vuex-ORM Components collection.
      * @param {Database} database The database passed to VuexORM.install.
      * @param {LokiConstructorOptions} lokiOptions The options passed to new LokiJS instance.
+     * @param {string} databaseName custom name for the LokiJS database (optional)
      */
     private constructor();
     /**
@@ -54,8 +55,9 @@ export default class Context {
      * @param {Components} components The Vuex-ORM Components collection.
      * @param {Database} database The database passed to VuexORM.install.
      * @param {Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>} options The options passed to new LokiJS instance.
+     * @param {string} databaseName custom name for the LokiJS database (optional)
      */
-    static setup(components: Components, database: Database, options: Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>, hydrationCompletedCallback: any): Context;
+    static setup(components: Components, database: Database, options: Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>, hydrationCompletedCallback: any, databaseName: string): Context;
     /**
      * Get the singleton instance of the context.
      * @returns {Context}
