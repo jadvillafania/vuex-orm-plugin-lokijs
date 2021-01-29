@@ -27,7 +27,7 @@ function encrypt (data: any, password: any) {
 
 const $update: any = function (context: any) {
   return async function (this: any, payload: any) {
-    const collectionName = this.name
+    const collectionName = this.entity
     const { password } = payload
 
     if (this.AES) {
