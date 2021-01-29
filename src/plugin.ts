@@ -23,7 +23,7 @@ export default class VuexORMLokiPlugin implements Plugin {
   public static instance: VuexORMLokiPlugin;
 
   public static install (components: Components, options: VuexORMLokiOptions, hydrationCompletedCallback: any) : VuexORMLokiPlugin {
-    VuexORMLokiPlugin.instance = new VuexORMLoki(components, options.database, options.options, options.hydrationCompletedCallback)
+    VuexORMLokiPlugin.instance = new VuexORMLoki(components, options.database, options.options, options.hydrationCompletedCallback, options.databaseName)
     return VuexORMLokiPlugin.instance
   }
 }

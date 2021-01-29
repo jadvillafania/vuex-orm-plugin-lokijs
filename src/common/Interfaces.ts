@@ -40,6 +40,7 @@ export interface VuexORMLokiOptions {
   database: Database,
   options: Partial<LokiConstructorOptions> & Partial<LokiConfigOptions> & Partial<ThrottledSaveDrainOptions>;
   hydrationCompletedCallback: any;
+  databaseName: string;
 }
 
 /**
