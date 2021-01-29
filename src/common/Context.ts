@@ -97,13 +97,13 @@ export default class Context {
    */
   public autoLoadCallback () : void {
     Object.keys(this.database.models()).forEach((key) => {
-      if (this.loki.getCollection(this.database.models()[key].name) === null) {
-        this.loki.addCollection(this.database.models()[key].name)
+      if (this.loki.getCollection(this.database.models()[key].entity) === null) {
+        this.loki.addCollection(this.database.models()[key].entity)
       };
     })
 
     Object.keys(this.database.models()).forEach((key) => {
-      const lokiData = this.loki.getCollection(this.database.models()[key].name).data
+      const lokiData = this.loki.getCollection(this.database.models()[key].entity).data
       const model = this.database.models()[key]
 
       lokiData.forEach((item) => {
